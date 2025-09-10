@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nenad Latinovic</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #fefcf8 0%, #faf8f4 100%);
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            padding: 40px 0 20px;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 40px;
+        }
+
+        .nav-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #333;
+        }
+
+        /* Content */
+        .page-content {
+            display: none;
+            padding-bottom: 60px;
+        }
+
+        .page-content.active {
+            display: block;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            font-size: 15px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        blockquote {
+            margin: 25px 0;
+            padding-left: 20px;
+            border-left: 2px solid #ddd;
+            font-style: italic;
+            color: #666;
+        }
+
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Hero section for home */
+        .hero {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .hero-portrait {
+            width: 80px;
+            height: 80px;
+            border-radius: 4px;
+            margin: 0 auto 20px;
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+        }
+
+        .hero h1 {
+            font-size: 26px;
+            margin-bottom: 10px;
+        }
+
+        .hero .subtitle {
+            font-size: 15px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .hero .description {
+            font-size: 15px;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        /* Focus areas for home */
+        .focus-area {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .focus-area:last-child {
+            border-bottom: none;
+        }
+
+        .focus-area h3 {
+            margin-top: 0;
+            margin-bottom: 8px;
+        }
+
+        .focus-area p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Blog posts */
+        .post-item {
+            margin-bottom: 30px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .post-item:last-child {
+            border-bottom: none;
+        }
+
+        .post-item h3 {
+            margin-top: 0;
+            margin-bottom: 5px;
+        }
+
+        .post-item h3 a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        .post-item h3 a:hover {
+            color: #0066cc;
+        }
+
+        .post-meta {
+            font-size: 13px;
+            color: #999;
+            margin-bottom: 10px;
+        }
+
+        .post-excerpt {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Now page sections */
+        .now-section {
+            margin-bottom: 30px;
+        }
+
+        .now-section h2 {
+            margin-top: 0;
+        }
+
+        .now-section ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .now-section li {
+            margin-bottom: 8px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid #ddd;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            text-align: center;
+            font-size: 13px;
+            color: #999;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .nav-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <div class="nav-content">
+                <a href="#" class="logo" onclick="showPage('home')">Nenad Latinovic</a>
+                <div class="nav-links">
+                    <a href="#" onclick="showPage('home')" id="nav-home" class="active">Home</a>
+                    <a href="#" onclick="showPage('about')" id="nav-about">About</a>
+                    <a href="#" onclick="showPage('writing')" id="nav-writing">Writing</a>
+                    <a href="#" onclick="showPage('now')" id="nav-now">Now</a>
+                </div>
+            </div>
+        </nav>
+
+        <main>
+            <!-- HOME PAGE -->
+            <div id="home" class="page-content active">
+                <div class="hero">
+                    <div class="hero-portrait"></div>
+                    <h1>Nenad Latinovic</h1>
+                    <p class="subtitle">SEO specialist, father, Orthodox Christian</p>
+                    <p class="description">
+                        Based in Ljubljana, Slovenia. Transforming from people-pleaser to purpose-driven leader.
+                    </p>
+                </div>
+
+                <div class="focus-area">
+                    <h3>Digital Strategy & Leadership</h3>
+                    <p>I work as a senior SEO specialist at Slovenia's largest insurance company, connecting technical capabilities with business outcomes. My focus is transitioning from pure technical work to revenue-focused digital strategy that directly impacts company growth.</p>
+                </div>
+
+                <div class="focus-area">
+                    <h3>Personal Transformation</h3>
+                    <p>After years of being intellectually capable but emotionally paralyzed, I'm building a life driven by duty rather than validation. This transformation is guided by Orthodox Christian faith, grounded in purpose, and focused on what actually matters: family, faith, and meaningful work.</p>
+                </div>
+
+                <div class="focus-area">
+                    <h3>Writing & Reflection</h3>
+                    <p>I write about leadership, decision-making, faith, and the journey from people-pleasing to purposeful living. My essays explore the intersection of Orthodox Christianity, modern leadership challenges, and the reality of being a father who wants to lead by example.</p>
+                </div>
+            </div>
+
+            <!-- ABOUT PAGE -->
+            <div id="about" class="page-content">
+                <h1>About Me</h1>
+                
+                <p>I am a 38-year-old father of two children (ages 3 and 7) living in Ljubljana, Slovenia. Professionally, I work as a senior SEO specialist at Slovenia's largest insurance company, where I focus on connecting technical capabilities with measurable business outcomes.</p>
+
+                <p>For most of my adult life, I was intellectually capable but emotionally paralyzed. I could analyze complex situations, connect disparate pieces of information, and understand nuanced problems, but I struggled with decision-making when it mattered most. This paralysis stemmed not from lack of knowledge, but from an overwhelming need to please others and avoid conflict.</p>
+
+                <h2>The Transformation</h2>
+
+                <p>Today marks what I call my "Victory Day"—September 10, 2025—the day I committed to transforming from someone who seeks validation to someone who operates from purpose. This transformation is not about becoming harsh or uncaring; it's about becoming clear on values, priorities, and whom I serve.</p>
+
+                <p>My approach is grounded in Orthodox Christian faith, which provides a framework for decisions that transcends contemporary opinion. Some things are simply right or wrong, regardless of what's popular or politically expedient.</p>
+
+                <h2>Professional Focus</h2>
+
+                <p>In my current role, I specialize in SEO and data analysis, but I'm actively transitioning toward roles that tie directly to revenue generation. I believe strongly in building T-shaped skills that make individuals indispensable to organizations. My goal is to position myself where technical expertise meets business strategy.</p>
+
+                <p>I'm particularly interested in opportunities with Central European scaleups—companies that have moved beyond startup chaos but haven't yet become politics-ridden corporations. The sweet spot where execution matters more than navigation.</p>
+
+                <h2>Personal Philosophy</h2>
+
+                <p>I want to be stylish but practical, creative but grounded, decisive but empathetic. Most importantly, I want to lead by example rather than constant instruction. My children need to see what decisive leadership looks like—not perfect leadership, but decisive leadership.</p>
+
+                <blockquote>
+                    I want to be successful, but grounded. I don't want to be measured by other people's validation, but by my goals and where I am on that timeline of mine.
+                </blockquote>
+
+                <p>This philosophy extends to my approach to productivity and self-improvement. I've moved away from modern productivity culture's endless frameworks and optimization tactics. Instead, I've embraced Orthodox Christian practices: morning prayers instead of morning pages, liturgical seasons instead of habit stacking, regular confession instead of goal reviews.</p>
+
+                <h2>Family and Faith</h2>
+
+                <p>My children are my primary motivation for this transformation. They need to see a father who operates from conviction rather than consensus-seeking. I want them to understand that strength comes through service and purpose through duty.</p>
+
+                <p>Orthodox Christianity provides the anchor for daily decisions. Unlike productivity systems that promise efficiency, faith promises transformation. It asks not "How can I optimize this?" but "How can I serve through this?"</p>
+
+                <h2>Current Goals</h2>
+
+                <p>My goal is simple: to serve. Specifically, I want to secure adequate housing and establish a 100,000 euro education fund for each child should they choose to pursue higher education. Everything beyond that is optional.</p>
+
+                <p>I currently earn 2,250 euros net monthly. Achieving my goals requires strategic career advancement through skills that directly impact company revenue—hence my focus on transitioning from pure SEO to business-focused digital strategy.</p>
+
+                <p>Today I begin living as the man my family needs me to be: decisive, purpose-driven, and unshakeable in my convictions.</p>
+            </div>
+
+            <!-- WRITING PAGE -->
+            <div id="writing" class="page-content">
+                <h1>Writing</h1>
+                
+                <div class="post-item">
+                    <h3><a href="#" onclick="showBlogPost('decisive')">On Becoming Decisive</a></h3>
+                    <div class="post-meta">September 10, 2025</div>
+                    <p class="post-excerpt">The transformation from people-pleaser to purpose-driven leader isn't about becoming harsh—it's about becoming clear. An exploration of what it means to stop living for applause and start living for purpose.</p>
+                </div>
+
+                <div class="post-item">
+                    <h3><a href="#">The DILF Energy Manifesto</a></h3>
+                    <div class="post-meta">September 5, 2025</div>
+                    <p class="post-excerpt">What it really means to be a stylish, grounded father who leads by example rather than endless instruction. Magnetic but not demanding validation, confident but not trying too hard.</p>
+                </div>
+
+                <div class="post-item">
+                    <h3><a href="#">Why I Chose Orthodox Faith Over Productivity Culture</a></h3>
+                    <div class="post-meta">August 28, 2025</div>
+                    <p class="post-excerpt">Frameworks and systems can't replace purpose and duty. An examination of why ancient wisdom provides better guidance than modern optimization tactics.</p>
+                </div>
+
+                <div class="post-item">
+                    <h3><a href="#">Victory Day: A Personal Declaration</a></h3>
+                    <div class="post-meta">August 15, 2025</div>
+                    <p class="post-excerpt">Setting September 10th as the day I stop being intellectually capable but emotionally paralyzed. A manifesto on duty, purpose, and the end of people-pleasing.</p>
+                </div>
+            </div>
+
+            <!-- NOW PAGE -->
+            <div id="now" class="page-content">
+                <h1>Now</h1>
+                <p><em>Updated September 10, 2025</em></p>
+
+                <div class="now-section">
+                    <h2>Work Focus</h2>
+                    <ul>
+                        <li>Transitioning from pure SEO to revenue-focused digital strategy</li>
+                        <li>Building T-shaped skills that directly impact company growth</li>
+                        <li>Exploring opportunities in Central European scaleups</li>
+                        <li>Developing expertise in data analytics and business intelligence</li>
+                    </ul>
+                </div>
+
+                <div class="now-section">
+                    <h2>Personal Development</h2>
+                    <ul>
+                        <li>Implementing Orthodox Christian practices in daily routine</li>
+                        <li>Physical transformation: yoga, flexibility, injury prevention</li>
+                        <li>Learning to set boundaries and eliminate people-pleasing</li>
+                        <li>Building decision-making confidence and execution capability</li>
+                    </ul>
+                </div>
+
+                <div class="now-section">
+                    <h2>Family Goals</h2>
+                    <ul>
+                        <li>Leading by example rather than constant instruction</li>
+                        <li>Building 100,000 euro education fund for each child</li>
+                        <li>Creating a home environment of purposeful calm</li>
+                        <li>Teaching children strength through service and purpose through duty</li>
+                    </ul>
+                </div>
+
+                <div class="now-section">
+                    <h2>Current Projects</h2>
+                    <ul>
+                        <li>Personal website and digital presence overhaul</li>
+                        <li>Career transition strategy from SEO to business strategy</li>
+                        <li>Establishing sustainable fitness routine after knee injury</li>
+                        <li>Writing series on leadership, faith, and purposeful living</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- SAMPLE BLOG POST -->
+            <div id="decisive" class="page-content">
+                <!-- Optional header image - uncomment and add src to use -->
+                <!-- <img src="your-image-url.jpg" alt="Post header image" class="post-header-image"> -->
+                
+                <h1>On Becoming Decisive</h1>
+                <p><em>September 10, 2025</em></p>
+
+                <p>For years, I was intellectually capable but emotionally paralyzed. I could analyze any situation from twelve different angles, connect dots that others missed, and understand the nuances of complex problems. But when it came to making decisions—real decisions that mattered—I froze.</p>
+
+                <p>The paralysis wasn't from lack of knowledge. It was from caring too much about what everyone else thought.</p>
+
+                <h2>The Weight of Others' Expectations</h2>
+
+                <p>People-pleasing is a prison with invisible bars. You think you're being kind, considerate, team-oriented. But really, you're just afraid. Afraid of disappointing someone. Afraid of being wrong. Afraid of standing alone in your convictions.</p>
+
+                <p>I spent so much energy trying to read rooms, anticipate reactions, and craft responses that would offend no one that I forgot how to just... decide. Based on what I believed. Based on what served my actual goals. Based on what was right.</p>
+
+                <h2>The Shift</h2>
+
+                <p>The transformation isn't about becoming harsh or uncaring. It's about becoming clear. Clear on your values. Clear on your priorities. Clear on who you serve and why.</p>
+
+                <blockquote>
+                    When you stop living for applause, you start living for purpose.
+                </blockquote>
+
+                <p>For me, that clarity comes from three sources:</p>
+
+                <h3>My Children</h3>
+                <p>They need to see what decisive leadership looks like. Not perfect leadership—decisive leadership. The difference is crucial.</p>
+
+                <h3>My Faith</h3>
+                <p>Orthodox Christianity provides a framework for decisions that transcends contemporary opinion. Some things are simply right or wrong, regardless of what's popular.</p>
+
+                <h3>My Purpose</h3>
+                <p>I serve my family first, my work second, my community third. When decisions align with this hierarchy, they become simpler.</p>
+
+                <h2>What Changed</h2>
+
+                <p>I stopped asking "What will people think?" and started asking "What serves my purpose?"</p>
+
+                <p>I stopped trying to craft perfect solutions and started shipping good ones.</p>
+
+                <p>I stopped seeking permission and started taking responsibility.</p>
+
+                <p>The funny thing? People respect decisiveness more than they respect consensus-seeking. Even when they disagree with your decision, they respect that you made one.</p>
+
+                <p>Today is September 10th. My Victory Day. The day I stop being intellectually capable but emotionally paralyzed.</p>
+
+                <p>The day I start being decisive.</p>
+
+                <p style="margin-top: 30px;">
+                    <a href="#" onclick="showPage('writing')">← Back to Writing</a>
+                </p>
+            </div>
+        </main>
+
+        <footer>
+            <div class="footer-content">
+                <p>Purpose over validation. Duty over comfort.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page-content');
+            pages.forEach(page => page.classList.remove('active'));
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update navigation
+            const navLinks = document.querySelectorAll('.nav-links a');
+            navLinks.forEach(link => link.classList.remove('active'));
+            
+            const targetNav = document.getElementById('nav-' + pageId);
+            if (targetNav) {
+                targetNav.classList.add('active');
+            }
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        function showBlogPost(postId) {
+            showPage(postId);
+        }
+    </script>
+</body>
+</html>
